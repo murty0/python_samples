@@ -1,0 +1,28 @@
+service: suspender-okta-admin
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: us-east-1
+  stage: dev
+  tags:
+    team-owner: xxxx
+    project: suspender-okta-admin
+  deploymentBucket:
+    name: serverless-apps-it
+    serverSideEncryption: AES256
+  deploymentPrefix: suspender-okta-admin-serverless
+  
+functions:
+  suspend_okta_admin:
+    handler: handler.suspend_okta_admin
+    timeout: 300 # 5 minutes
+    role: arn:aws:iam::123456789:role/suspender-okta-admin
+    events:
+      - sqs: arn:aws:sqs:us-east-1:123456789:suspend_service_account_okta
+    vpc:
+      securityGroupIds:
+        - sg-123456
+      subnetIds:
+        - subnet-1234567890abc
+        
