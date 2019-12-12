@@ -1,0 +1,1 @@
+* * * * * cd /s3_wrapper/; /usr/bin/python3 ./s3_wrapper_user.py >> /var/log/cron.log 2>&1
