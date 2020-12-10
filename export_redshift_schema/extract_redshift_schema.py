@@ -14,7 +14,7 @@ def extract_redshift_schema(
   db_user,
   cluster_identifier,
   endpoint,
-  bot2_scripts_redshift_copy_schema_dir,
+  redshift_copy_schema_dir,
   v_generate_tbl_ddl_sql_file,
   get_schema_sql,
   schema_file):
@@ -62,8 +62,7 @@ def main(region, db_name, db_user, cluster_identifier, endpoint):
   # Sources:
   # - https://github.com/awslabs/amazon-redshift-utils/blob/4646dacf0d25494d2b2225c66c1b50305564e8c3/src/AdminViews/v_generate_tbl_ddl.sql
 
-  bot2_dir = os.environ['BOT2_DIR']
-  redshift_copy_schema_dir = f"{bot2_dir}/scripts/redshift/extract_schema"
+  redshift_copy_schema_dir = "scripts/redshift/extract_schema"
   v_generate_tbl_ddl_sql_file = open(f"{redshift_copy_schema_dir}/v_generate_tbl_ddl.sql", 'r')
   get_schema_sql = "select ddl from ( " + \
       "(select * from public.v_generate_tbl_ddl " + \
@@ -88,7 +87,7 @@ def main(region, db_name, db_user, cluster_identifier, endpoint):
     db_user=db_user,
     cluster_identifier=cluster_identifier,
     endpoint=endpoint,
-    bot2_scripts_redshift_copy_schema_dir=redshift_copy_schema_dir,
+    redshift_copy_schema_dir=redshift_copy_schema_dir,
     v_generate_tbl_ddl_sql_file=v_generate_tbl_ddl_sql_file,
     get_schema_sql=get_schema_sql,
     schema_file=schema_file
