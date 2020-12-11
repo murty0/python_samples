@@ -1,0 +1,3 @@
+- This script systematically cordons off a node, scales up the ASG, drains that node, waits for all Pod replicas to be up and ready again in the cluster, terminates that node, and then scales back down the ASG. It does this for each node. 
+- The script can rotate either `'all'` nodes, `'dbs'` nodes, or `'apps'` nodes, by passing in the appropriate flag. 
+- If there are pods which you want to ignore (e.g. `'DaemonSets'` or pods which are not backed by `'ReplicaSets'` e.g. `'datadog-agent'`), add the pod names to the `'pods_to_ignore'` list.
